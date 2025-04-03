@@ -1,0 +1,73 @@
+{% extends "blog/base.html" %}
+
+{% block title %}{{ article.titre }} - Mon Blog{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <article class="card mb-4">
+                {% if article.image %}
+                <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.titre }}">
+                {% endif %}
+                <div class="card-body">
+                    <h1 class="card-title">{{ article.titre }}</h1>
+                    <p class="text-muted">
+                        <i class="fas fa-user"></i> Par {{ article.auteur.username }} | 
+                        <i class="fas fa-calendar"></i> {{ article.date_publication|date:"d F Y" }}
+                    </p>
+                    <div class="card-text">
+                        {{ article.contenu|linebreaks }}
+                    </div>
+                </div>
+            </article>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="fas fa-user-graduate"></i> Informations de l'Étudiant</h5>
+                </div>
+                <div class="card-body">
+                    {% if article.photo_etudiant %}
+                    <div class="text-center mb-3">
+                        <img src="{{ article.photo_etudiant.url }}" class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover;" alt="Photo de l'étudiant">
+                    </div>
+                    {% endif %}
+                    
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="fas fa-id-card"></i> <strong>Numéro étudiant:</strong><br>
+                            {{ article.numero_etudiant }}
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-user"></i> <strong>Nom:</strong><br>
+                            {{ article.nom_etudiant }} {{ article.prenom_etudiant }}
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-graduation-cap"></i> <strong>Filière:</strong><br>
+                            {{ article.filiere }}
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-layer-group"></i> <strong>Niveau:</strong><br>
+                            {{ article.niveau }}
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-envelope"></i> <strong>Email:</strong><br>
+                            {{ article.email_etudiant }}
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-phone"></i> <strong>Téléphone:</strong><br>
+                            {{ article.telephone }}
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-birthday-cake"></i> <strong>Date de naissance:</strong><br>
+                            {{ article.date_naissance|date:"d F Y" }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
